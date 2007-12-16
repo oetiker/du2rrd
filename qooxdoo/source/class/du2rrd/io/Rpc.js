@@ -24,8 +24,8 @@ qx.Class.define('du2rrd.io.Rpc',
 
         with(this){
 			base(arguments);
-            setTimeout(7000000);
-            setUrl('jsonrpc.cgi');
+            setTimeout(300000);
+            setUrl('du2rrd.cgi');
             setServiceName('du2rrd');
         }
 

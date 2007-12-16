@@ -1,12 +1,10 @@
 package Qooxdoo::Services::du2rrd;
 use strict;
 use warnings;
-use lib qw(/usr/pack/rrdtool-1.2.23-mo/lib/perl);
 use RRDs;
 use Storable qw(retrieve);
-use Data::Dumper;
 
-my $root = '/scratch/du2rrd/';
+my $root = $::DU2RRD_ROOT;
 
 sub GetAccessibility {
         return "public";
