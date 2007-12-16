@@ -1,0 +1,291 @@
+#!/usr/sepp/bin/perl-5.8.8 -w
+#
+# $Id: du2rrd.pl 2181 2007-12-10 13:09:31Z oetiker $
+# $Author: oetiker $
+# $HeadURL: svn://svn.oetiker.ch/oep-projects/current/fmi-samfs/du2rrd.pl $
+# $Rev: 2181 $
+# $Date: 2007-12-10 14:09:31 +0100 (Mon, 10 Dec 2007) $
+#
+require 5.008;
+use strict;
+use warnings;
+use Getopt::Long 2.25 qw(:config posix_default no_ignore_case);
+use Pod::Usage 1.14;
+use lib qw(/usr/pack/rrdtool-1.2.23-mo/lib/perl);
+use RRDs;
+use Storable qw(nstore);
+
+my $Revision = ('$Revision: 1$' =~ /(\d+)/);
+
+# main loop
+my %opt = (
+           interval => 3600*24,
+           now => time,
+           hires_years => 5, #years
+           lowres_years => 15, #years
+           rrd_root => '/var/lib/du2rrd/data',
+          );
+
+sub main
+{
+    # parse options
+    GetOptions(\%opt, 'help|h', 'man', 'version', 'noaction|no-action|n',
+               'verbose|v','interval=i','now=i',
+               'hires_years=i','lowres_years=i', 'rrd_root=s') or exit(1);
+    if ($opt{help})     { pod2usage(1) }
+    if ($opt{man})      { pod2usage(-exitstatus => 0, -verbose => 2) }
+    if ($opt{version})  { print "sdu2rrd $Revision\n"; exit(0) }
+    if ($opt{noaction}) { $opt{verbose}=1 };
+    my $maps = {};
+    while (my $map = shift @ARGV) {
+        my($name,$arg) = parse_map($map);
+        $maps->{$name} = $arg;
+    }
+    my $du = parse_du($maps);
+    update_rrd($opt{rrd_root},$du);
+    nstore($du,$opt{rrd_root}.'/status.storable');
+}
+
+
+main;
+
+# make sure we have an rrd to store our data in
+
+sub ensure_rrd {
+    my $path = shift;
+    my $rrd = $path.'.rrd';
+    return if -r $rrd;
+    # we put that / back on a few lines later ...
+    $path =~ s|^/||;
+    my @directories = split /\/+/,$path;
+    pop @directories; # loose the last element since this is the rrd name.
+    my $subpath = '';
+    for my $dir (@directories) {
+        $subpath .= '/'.$dir;
+        if (not -d $subpath) {
+            print STDERR "### mkdir $subpath\n"
+                if $opt{verbose};
+            mkdir $subpath or die "ERROR creating $subpath: $!\n"
+                if not $opt{noaction};
+        }
+    }
+    print STDERR "### rrdtool create $rrd\n"
+        if $opt{verbose};
+    if (not $opt{noaction}) {
+        RRDs::create($rrd,
+                     '--step' => $opt{interval},
+                     '--start' => $opt{now} - 10,
+                     'DS:diskusage:GAUGE:'.($opt{interval}*1.5).':0:U',
+                     'RRA:AVERAGE:0.5:1:'.($opt{hires_years}*366),
+                     'RRA:AVERAGE:0.5:7:'.($opt{lowres_years}*52),
+                     'RRA:MIN:0.5:7:'.($opt{lowres_years}*52),
+                     'RRA:MAX:0.5:7:'.($opt{lowres_years}*52)
+                    );
+        if (my $ERROR = RRDs::error) {
+            die "ERROR $ERROR\n";
+        }
+    }
+    return 0;
+}
+
+sub update_rrd {
+    my $path = shift;
+    my $du = shift;
+    for my $item (sort keys %$du) {
+        if (ref $du->{$item} eq 'HASH') {
+            update_rrd($path.'/'.$item, $du->{$item});
+        } elsif ($item eq '/size'){
+            ensure_rrd($path);
+            print STDERR "### rrdtool update $path.rrd $opt{now}:$du->{$item}\n"
+                if $opt{verbose};
+            if (not $opt{noaction}) {
+                RRDs::update($path.'.rrd',$opt{now}.':'.($du->{$item}));
+                if (my $ERROR = RRDs::error) {
+                    die "ERROR $ERROR\n";
+                };
+            }
+        }
+    }
+}
+
+
+# parse maps into a hash containing regular expressions
+# for each map. We then apply these regexps to the incoming
+# stream of du lines. See next function.
+
+sub parse_map {
+    my $map = shift;
+    my ($name,$list) = split /=/,$map,2;
+    die "ERROR Map $map makes no sense to me!\n"
+        if not defined $name or not defined $list;
+    my @list = split /\/+/, $list;
+    my @rx;
+    my @names;
+    for my $entry (@list) {
+        if ($entry eq '*') {
+            push @rx, '[^/]+';
+        }
+        elsif ($entry =~ /^{(.*)}$/) {
+            die "ERROR you used an empty name in the hierarchy\n"
+                if $1 eq '';
+            push @rx, '([^/]+)';
+            push @names, $1;
+        }
+        elsif ($entry =~ /^(.+)$/){
+            push @rx, "${1}";
+        }
+        # skip emty entries
+    }
+    my $rx = join '/',@rx;
+    return (${name}, { rx => qr{^/$rx$}, labels=> [@names]});
+}
+
+# parse du output (via stdin) using the parsed maps from the previous
+# function. Apply the maps to each line in turn whenever something matches,
+# sum it up.
+
+sub parse_du {
+    my $maps = shift;
+    my $du = {};
+    while(<>){
+        chomp;
+        my ($size,$path) = split /\s+/,$_,2;
+        $size *= 1024; # sitze is in kb!
+        for my $map (keys %$maps) {
+            $du->{$map} ||= {};
+            my @ret;
+            if (@ret = ($path =~ $maps->{$map}{rx})){
+                my @labels = @{$maps->{$map}{labels}};
+                my $store = $du->{$map};
+                for my $param (@ret) {
+                    # directory names contain no /
+                    # by using the / as an escape we
+                    # are safe.
+                    $store->{$param}{'/size'} += $size;
+                    $store->{'/label'} = shift @labels;
+                    $store = $store->{$param};
+                }
+            }
+        }
+    }
+    # calculate a grand total
+    # for each map
+    for my $map (keys %$du) {
+        my $sum = 0;
+        for my $key (keys %{$du->{$map}}) {
+            next if $key =~ m|^/|;
+            $sum += $du->{$map}{$key}{'/size'};
+        }
+        $du->{$map}{'/size'} = $sum;
+    }
+    return $du;
+}
+
+__END__
+
+=head1 NAME
+
+du2rrd-gatherer - store du output in rrd files
+
+=head1 SYNOPSIS
+
+B<du2rrd> [I<options>...] I<Name=map> I<...>
+
+     --man            show man-page and exit
+ -h, --help           display this help and exit
+     --version        output version information and exit
+     --noaction       just talk about what you would do
+     --rrd_root=s     store my data in an alternate location (/var/lib/du2rrd)
+     --now=i          assume something else than current time (time)
+     --hires_years=i  for how many years to keep 1 day resolution (5)
+     --lowres_years=i for how many years to keep 7 day resolution (15)
+
+=head1 DESCRIPTION
+
+B<du2rrd> is a command line tool which lets you track disk usage based
+on the output of F<du> (or any other program producing equivalent
+output). The tool will parse F<du> output and feed it into rrd
+files. The rrd files live in a tree created based at
+F</var/lib/du2rrd/data>.
+
+The I<map> arguments define how you want to store your data. The
+structure is based on directory tree elements, assigned to a
+name. Lets assume the following directory structure:
+
+ /archive/Platform_A/Application_A1/Group_A/User_A
+ /archive/Platform_A/Application_A1/Group_A/User_B
+ /archive/Platform_A/Application_A1/Group_A/User_C
+ /archive/Platform_C/Application_C1/Group_B/User_A
+ /archive/Platform_C/Application_C2/Group_B/User_B
+ /archive/Platform_K/Application_K1/Group_D/User_B
+
+All that is interesting to us. Lives below the F</archive>
+directory. In the archive there is a structure of Platforms and
+Applications below that Groups and Users are located. While an
+Application is part of a Platform, the Groups and Users can occur
+multiple times in different locations. So we choose the following set
+of maps.
+
+ Detail=/archive/{Platforms}/{Applications}/{Groups}/{Users}
+
+Creates a tree of files, with a file for each B<Platform>, B<Application>,
+B<Group> and B<User>. It will store them in a directory hierarchy equivalent
+to the map. The common prefix B<archive> operates as a filter. Du lines
+which do not begin with F</archive> get ignored.
+
+Note that the F<archive> is actually a regular expression so more
+complex filters are possible too.
+
+ Groups=/archive/*/*/{Groups}
+
+Will ignore the Platform and Application directory levels by putting a
+star in their place. Then it will sum up each groups usage across all
+Platforms and Applications.
+
+ Users=/archive/*/*/*/{Users}
+
+Will do the same for Users.
+
+You can create as many Maps as you like.
+
+=head1 COPYRIGHT
+
+Copyright (c) 2007 by OETIKER+PARTNER AG. All rights reserved.
+
+=head1 LICENSE
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+=head1 AUTHOR
+
+S<Tobi Oetiker E<lt>tobi@oetiker.chE<gt>>
+
+=head1 HISTORY
+
+ 2007-02-02 to only delete stuff at night
+
+=cut
+
+# Emacs Configuration
+#
+# Local Variables:
+# mode: cperl
+# eval: (cperl-set-style "PerlStyle")
+# mode: flyspell
+# mode: flyspell-prog
+# End:
+#
+# vi: sw=4 et
+

@@ -1,0 +1,2 @@
+# sample crontab 
+20 3 * * * /usr/bin/du /archive | /usr/bin/du2rrd --rrd_root=/var/lib/du2rrd "Main=/archive/{Platform}/{Application}/{Group}/{User}" "Groups=/archive/*/*/{Group}" "Users=/archive/*/*/*/{User}"
