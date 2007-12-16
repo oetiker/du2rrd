@@ -35,7 +35,7 @@ export PATH:=/usr/pack/python-debian31-2.4.4-to/bin:$(PATH)
 # Please note that Windows users should always use relative paths.
 # It should end with the last directory. Please omit a trailing slash.
 #
-QOOXDOO_PATH = ../qooxdoolink
+QOOXDOO_PATH = qooxdoolink
 QOOXDOO_URI = ../qooxdoolink
 #QOOXDOO_URI = file:///Q:/$(QOOXDOO_PATH)
 
@@ -50,7 +50,7 @@ APPLICATION_NAMESPACE = du2rrd
 # Files that will be copied from the source directory into the build
 # directory (space separated list). The default list is empty.
 #
-APPLICATION_FILES = index.html jsonrpc.cgi get.cgi perl
+APPLICATION_FILES = index.html du2rrd.cgi perl
 # APPLICATION_BUILD_LOG_LEVEL = debug
 APPLICATION_BUILD_LOG_LEVEL = off
 
@@ -60,7 +60,7 @@ APPLICATION_BUILD_LOG_LEVEL = off
 # $(QOOXDOO_PATH)/frontend/framework/tool/make/application.mk
 # Add any of those variables for your custom configuration here:
 #-------------------------------------------------------------------------------
-APPLICATION_LOCALES = en de fr
+APPLICATION_LOCALES = en de
 
 APPLICATION_RESOURCE_FILTER = true
 APPLICATION_COMPLETE_SOURCE = false
