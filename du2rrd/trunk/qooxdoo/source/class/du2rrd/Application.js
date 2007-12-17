@@ -32,15 +32,38 @@ qx.Class.define('du2rrd.Application',
                 setSpacing(2);
             };            
             prime.addToDocument();
-
-			var title = new qx.ui.basic.Atom(this.tr('du2rrd - Long Term Disk Space Monitoring'));
-			title.set({
+            var title_box = new qx.ui.layout.HorizontalBoxLayout();
+            title_box.set({
+                paddingBottom: 4,
+                height: 'auto'
+            });
+            var left = new qx.ui.form.Button(this.tr("du2rrd"));
+            left.set({
+                textColor: '#808080',
+                font: qx.ui.core.Font.fromString('17px bold sans-serif'),
+                border: null,
+                padding: 1
+            });
+            
+            left.addEventListener('execute', function(e){
+                var w = new qx.client.NativeWindow('http://oss.oetiker.ch/optools/wiki/du2rrd');
+                w.set({
+                    width: 950,
+                    height: 700
+                })
+                w.open()
+            });
+            title_box.add(left);
+            title_box.add(new qx.ui.basic.HorizontalSpacer());
+			var right = new qx.ui.basic.Atom(this.tr("Disk Space Monitoring Delux"));
+			right.set({
             	textColor: '#a0a0a0',
-            	font: qx.ui.core.Font.fromString('16px bold sans-serif'),
-                paddingBottom: 4
+            	font: qx.ui.core.Font.fromString('14px sans-serif')
 			});
+            right.add(new qx.ui.basic.Atom('VERSION'));
+			title_box.add(right);
 
-			prime.add(title);
+            prime.add(title_box);
 
 		    var splitpane = new qx.ui.splitpane.HorizontalSplitPane(300, '1*');
 		    splitpane.setEdge(0);
@@ -70,7 +93,7 @@ qx.Class.define('du2rrd.Application',
             var logo_box = new qx.ui.layout.HorizontalBoxLayout();
             logo_box.setHorizontalChildrenAlign('right');
             logo_box.setHeight('auto');
-            var logo = new qx.ui.form.Button('Created by OETIKER+PARTNER AG');
+            var logo = new qx.ui.form.Button(this.tr("Created by Tobi Oetiker, OETIKER+PARTNER AG"));
             logo.set({
                 textColor: '#b0b0b0',
                 font: qx.ui.core.Font.fromString('8px sans-serif'),
