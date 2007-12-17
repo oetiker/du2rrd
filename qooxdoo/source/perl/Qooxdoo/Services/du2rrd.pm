@@ -4,7 +4,8 @@ use warnings;
 use RRDs;
 use Storable qw(retrieve);
 
-my $root = $::DU2RRD_ROOT;
+use vars qw($DU2RRD_ROOT);
+my $root = $DU2RRD_ROOT;
 
 sub GetAccessibility {
         return "public";
@@ -32,7 +33,7 @@ sub method_get_tree
 {
     my $error = shift;
     my $param = shift;
-    my $tree = eval{ retrieve($root.'status.storable') };
+    my $tree = eval{ retrieve($root.'/status.storable') };
     if ($@){
         $error->set_error(101,$@);
         return $error;
@@ -58,7 +59,7 @@ sub method_prepare_graph {
     my $error = shift;
     my $p = shift;
 
-    my $tree = eval{ retrieve($root.'status.storable') };
+    my $tree = eval{ retrieve($root.'/status.storable') };
     if ($@){
         $error->set_error(104,$@);
         return $error;
