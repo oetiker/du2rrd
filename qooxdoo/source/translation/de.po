@@ -12,7 +12,7 @@ msgstr ""
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -22,13 +22,13 @@ msgstr ""
 
 #: source/class/du2rrd/Application.js:58
 msgid "Disk Space Monitoring Delux"
-msgstr "Diskplatz Monitoring der Extraklasse"
+msgstr "Diskplatz Ãœberwachung der Extraklasse"
 
 #: source/class/du2rrd/Application.js:84
 msgid ""
 "Double-Click to draw a graph.<br/>Use Checkboxes to add items to the graph."
 msgstr ""
-"Doppelclick zeichnet die Graphik.<br/>Benutze die Checkboxen um Elemente hinzu zu fügen."
+"Doppelclick zeichnet die Graphik.<br/>Benutze die Checkboxen um Elemente hinzu zu fÃ¼gen."
 
 #: source/class/du2rrd/Application.js:96
 msgid "Created by Tobi Oetiker, OETIKER+PARTNER AG"
@@ -40,27 +40,27 @@ msgstr "Die Graphik konnte nicht geladen werden. Zweiter Versuch!"
 
 #: source/class/du2rrd/ui/RangeSelect.js:17
 msgid "graph 1 month back"
-msgstr "Graphik über einen Monat"
+msgstr "Graphik Ã¼ber einen Monat"
 
 #: source/class/du2rrd/ui/RangeSelect.js:18
 msgid "graph 3 months back"
-msgstr "Graphik über die letzten drei Monate"
+msgstr "Graphik Ã¼ber die letzten drei Monate"
 
 #: source/class/du2rrd/ui/RangeSelect.js:19
 msgid "graph 1 year back"
-msgstr "Graphik über das letzte Jahr"
+msgstr "Graphik Ã¼ber das letzte Jahr"
 
 #: source/class/du2rrd/ui/RangeSelect.js:20
 msgid "graph 3 years back"
-msgstr "Graphik über die letzten drei Jahre"
+msgstr "Graphik Ã¼ber die letzten drei Jahre"
 
 #: source/class/du2rrd/ui/RangeSelect.js:21
 msgid "graph 5 years back"
-msgstr "Graphik über die letzten fünf Jahre"
+msgstr "Graphik Ã¼ber die letzten fÃ¼nf Jahre"
 
 #: source/class/du2rrd/ui/RangeSelect.js:22
 msgid "graph 10 years back"
-msgstr "Graphik über die letzten zehn Jahre"
+msgstr "Graphik Ã¼ber die letzten zehn Jahre"
 
 #: source/class/du2rrd/ui/TargetTree.js:30
 msgid "Directory"
@@ -68,7 +68,7 @@ msgstr "Verzeichnis"
 
 #: source/class/du2rrd/ui/TargetTree.js:31
 msgid "Size MB"
-msgstr "Grösse MB"
+msgstr "GrÃ¶sse MB"
 
 #: source/class/du2rrd/ui/TargetTree.js:32
 msgid "S"
