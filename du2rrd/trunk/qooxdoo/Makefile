@@ -1,23 +1,20 @@
 ################################################################################
 #
-#  qooxdoo - the new era of web development
+#  du2rrd
 #
-#  http://qooxdoo.org
+#  http://oss.oetiker.ch/optools/wiki/du2rrd
 #
 #  Copyright:
-#    2006-2007 1&1 Internet AG, Germany, http://www.1and1.org
+#    2007 OETIKER+PARTNER AG, http://oetiker.ch
 #
 #  License:
-#    LGPL: http://www.gnu.org/licenses/lgpl.html
-#    EPL: http://www.eclipse.org/org/documents/epl-v10.php
-#    See the LICENSE file in the project's top-level directory for details.
+#    GPL: http://www.gnu.org/licenses/gpl.html
 #
 #  Authors:
-#    * Sebastian Werner (wpbasti)
-#    * Andreas Ecker (ecker)
-#    * Fabian Jakobs (fjakobs)
+#    * Tobias Oetiker (oetiker)
 #
 ################################################################################
+# the qooxdoo build system need at least python 2.4
 export PATH:=/usr/pack/python-debian31-2.4.4-to/bin:$(PATH)
 
 ################################################################################
@@ -35,6 +32,7 @@ export PATH:=/usr/pack/python-debian31-2.4.4-to/bin:$(PATH)
 # Please note that Windows users should always use relative paths.
 # It should end with the last directory. Please omit a trailing slash.
 #
+# qooxdoo link is a symlink pointing 'relative' to the root of the qooxdoo sdk
 QOOXDOO_PATH = qooxdoolink
 QOOXDOO_URI = ../qooxdoolink
 #QOOXDOO_URI = file:///Q:/$(QOOXDOO_PATH)
@@ -63,7 +61,7 @@ APPLICATION_BUILD_LOG_LEVEL = off
 APPLICATION_LOCALES = en de
 
 APPLICATION_RESOURCE_FILTER = true
-APPLICATION_COMPLETE_SOURCE = false
+#APPLICATION_COMPLETE_SOURCE = false
 APPLICATION_THEME_ICON = qx.theme.icon.CrystalClear
 
 # these are set by default
