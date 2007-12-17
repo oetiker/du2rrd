@@ -22,53 +22,54 @@ msgstr ""
 
 #: source/class/du2rrd/Application.js:58
 msgid "Disk Space Monitoring Delux"
-msgstr ""
+msgstr "Diskplatz Monitoring der Extraklasse"
 
 #: source/class/du2rrd/Application.js:84
 msgid ""
 "Double-Click to draw a graph.<br/>Use Checkboxes to add items to the graph."
 msgstr ""
+"Doppelclick zeichnet die Graphik.<br/>Benutze die Checkboxen um Elemente hinzu zu fügen."
 
 #: source/class/du2rrd/Application.js:96
 msgid "Created by Tobi Oetiker, OETIKER+PARTNER AG"
-msgstr ""
+msgstr "Eine Kreation von Tobi Oetiker, OETIKER+PARTNER AG"
 
 #: source/class/du2rrd/ui/Graph.js:89
 msgid "Loading Graph failed. Try again!"
-msgstr ""
+msgstr "Die Graphik konnte nicht geladen werden. Zweiter Versuch!"
 
 #: source/class/du2rrd/ui/RangeSelect.js:17
 msgid "graph 1 month back"
-msgstr ""
+msgstr "Graphik über einen Monat"
 
 #: source/class/du2rrd/ui/RangeSelect.js:18
 msgid "graph 3 months back"
-msgstr ""
+msgstr "Graphik über die letzten drei Monate"
 
 #: source/class/du2rrd/ui/RangeSelect.js:19
 msgid "graph 1 year back"
-msgstr ""
+msgstr "Graphik über das letzte Jahr"
 
 #: source/class/du2rrd/ui/RangeSelect.js:20
 msgid "graph 3 years back"
-msgstr ""
+msgstr "Graphik über die letzten drei Jahre"
 
 #: source/class/du2rrd/ui/RangeSelect.js:21
 msgid "graph 5 years back"
-msgstr ""
+msgstr "Graphik über die letzten fünf Jahre"
 
 #: source/class/du2rrd/ui/RangeSelect.js:22
 msgid "graph 10 years back"
-msgstr ""
+msgstr "Graphik über die letzten zehn Jahre"
 
 #: source/class/du2rrd/ui/TargetTree.js:30
 msgid "Directory"
-msgstr ""
+msgstr "Verzeichnis"
 
 #: source/class/du2rrd/ui/TargetTree.js:31
 msgid "Size MB"
-msgstr ""
+msgstr "Grösse MB"
 
 #: source/class/du2rrd/ui/TargetTree.js:32
 msgid "S"
-msgstr ""
+msgstr "X"
