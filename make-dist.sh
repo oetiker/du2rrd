@@ -19,3 +19,4 @@ svn export svn://oss.oetiker.ch/optools/du2rrd/trunk/qooxdoo src
 cd ..
 tar zcvf $root.tar.gz $root
 rm -rf $root
+scp $root.tar.gz oposs@james:public_html/optools/pub/du2rrd/
