@@ -44,7 +44,7 @@ qx.Class.define('du2rrd.ui.Graph',
         var self=this;
         this._prepare_graph = function(data,exc,id){
             if (exc == null){
-                self._preloader = qx.io.image.PreloaderManager.getInstance().create(self.getRpc().getBaseUrl()+'get.cgi?graph='+data['handle']);
+                self._preloader = qx.io.image.PreloaderManager.getInstance().create(self.getRpc().getBaseUrl()+'du2rrd.cgi?graph='+data['handle']);
                 if (self._preloader.isLoaded()){
                     qx.client.Timer.once(self._image_loader,self,0);
                 }
