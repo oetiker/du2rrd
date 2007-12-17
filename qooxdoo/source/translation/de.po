@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: du 2rrd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-17 00:27+0100\n"
+"POT-Creation-Date: 2007-12-17 22:58+0100\n"
 "PO-Revision-Date: 2007-12-17 00:27+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -16,9 +16,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: source/class/du2rrd/Application.js:61
+#: source/class/du2rrd/Application.js:40
+msgid "du2rrd"
+msgstr ""
+
+#: source/class/du2rrd/Application.js:58
+msgid "Disk Space Monitoring Delux"
+msgstr ""
+
+#: source/class/du2rrd/Application.js:84
 msgid ""
 "Double-Click to draw a graph.<br/>Use Checkboxes to add items to the graph."
+msgstr ""
+
+#: source/class/du2rrd/Application.js:96
+msgid "Created by Tobi Oetiker, OETIKER+PARTNER AG"
 msgstr ""
 
 #: source/class/du2rrd/ui/Graph.js:89
@@ -54,7 +66,7 @@ msgid "Directory"
 msgstr ""
 
 #: source/class/du2rrd/ui/TargetTree.js:31
-msgid "Size GB"
+msgid "Size MB"
 msgstr ""
 
 #: source/class/du2rrd/ui/TargetTree.js:32

@@ -120,7 +120,7 @@ qx.Class.define('du2rrd.ui.TargetTree',
             for (var i=3;i<length;i++){                
                 if(qx.util.Validation.isValidArray(data[i])){
                     sum += data[i][1];
-                    du2rrd.ui.TargetTree._add_data(model,branch,data[i],(sum < total * 0.8 || i < 3*6));
+                    du2rrd.ui.TargetTree._add_data(model,branch,data[i],(i < 3*10));
                 }
                 else {
                     var leaf = model.addLeaf(branch,data[i]);
@@ -128,7 +128,7 @@ qx.Class.define('du2rrd.ui.TargetTree',
                     model.data.application._nodemap[data[i+2]] = leaf;
                     sum += data[i+1];            
                     model.setColumnData(leaf,1,Math.round(data[i+1]/1024/1024));        
-                    model.setColumnData(leaf,2,(sum < total * 0.8 || i < 3*6));                                    
+                    model.setColumnData(leaf,2,(i < 3*10));                                    
                     i += 2;
                     //files.push(data[i-1]);
                     //folder.add(file);
