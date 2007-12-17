@@ -1,5 +1,5 @@
 #!/bin/sh
-V=1.0.0
+V=0.0.1
 set -x 
 root=du2rrd-$V
 mv qooxdoo/build qooxdoo/build.offline
@@ -16,6 +16,7 @@ cd $root
 pod2man --release=${V} --center=du2rrd bin/du2rrd > man/man1/du2rrd.1
 GROFF_NO_SGR=1 /usr/bin/nroff -man -Tlp man/man1/du2rrd.1 > doc/du2rrd.txt
 svn export svn://oss.oetiker.ch/optools/du2rrd/trunk/qooxdoo src
+perl -i -p -e 's/VERSION/'$V'/' htdocs/script/du2rrd.js
 cd ..
 tar zcvf $root.tar.gz $root
 rm -rf $root
