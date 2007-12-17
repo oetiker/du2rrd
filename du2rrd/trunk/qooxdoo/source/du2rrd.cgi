@@ -1,15 +1,15 @@
-#!/usr/bin/perl -w
+#!/usr/sepp/bin/perl-5.8.8 -w
 
 use strict;
 
 # Point this to the location of your du2rrd data store
 
-my $Qooxdoo::Services::du2rrd::DU2RRD_ROOT = '/var/lib/du2rrd';
+$Qooxdoo::Services::du2rrd::DU2RRD_ROOT = '/home/oposs/du2rrd/data';
 
 # Point this to your rrdtool installation of you are
 # not useing the standard setup
 
-use lib qw( /usr/pack/rrdtool-1.3svn-to/lib/perl );
+use lib qw( /usr/pack/rrdtool-1.2.23-mo/lib/perl );
 
 ###########################################################
 # Watch and learn. But don't modify until you understand.
