@@ -1,9 +1,9 @@
 #!/usr/sepp/bin/perl-5.8.8 -w
 #
-# $Id: du2rrd.pl 2181 2007-12-10 13:09:31Z oetiker $
-# $Author: oetiker $
-# $HeadURL: svn://svn.oetiker.ch/oep-projects/current/fmi-samfs/du2rrd.pl $
-# $Rev: 2181 $
+# $Id$
+# $Author$
+# $HeadURL$
+# $Rev$
 # $Date: 2007-12-10 14:09:31 +0100 (Mon, 10 Dec 2007) $
 #
 require 5.008;
