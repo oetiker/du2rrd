@@ -4,7 +4,7 @@
 # $Author$
 # $HeadURL$
 # $Rev$
-# $Date: 2007-12-10 14:09:31 +0100 (Mon, 10 Dec 2007) $
+# $Date$
 #
 require 5.008;
 use strict;
