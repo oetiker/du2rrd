@@ -3,8 +3,9 @@
 use strict;
 
 # Point this to the location of your du2rrd data store
-
+{ no warnings;
 $Qooxdoo::Services::du2rrd::DU2RRD_ROOT = '/home/oposs/du2rrd/data';
+}
 
 # Point this to your rrdtool installation of you are
 # not useing the standard setup
@@ -29,7 +30,7 @@ $Qooxdoo::JSONRPC::debug=1;
 
 my $cgi     = new CGI;
 
-if ($cgi->param('graph') =~ m|^([^/]+)$|){
+if ($cgi->param('graph') and $cgi->param('graph') =~ m|^([^/]+)$|){
     # the webif wants a graph we have prepared
     my $graph = "/tmp/du2rrd.$1.png";
     if (open (my $fh,"<$graph")){
