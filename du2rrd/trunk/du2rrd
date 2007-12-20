@@ -74,13 +74,17 @@ sub ensure_rrd {
     if (not $opt{noaction}) {
         RRDs::create($rrd,
                      '--step' => $opt{interval},
-                     '--start' => $opt{now} - 10,
-                     'DS:diskusage:GAUGE:'.($opt{interval}*1.5).':0:U',
+                     '--start' => $opt{now}-3*$opt{interval},
+                     'DS:diskusage:GAUGE:'.int($opt{interval}*2.1).':0:U',
                      'RRA:AVERAGE:0.5:1:'.($opt{hires_years}*366),
                      'RRA:AVERAGE:0.5:7:'.($opt{lowres_years}*52),
                      'RRA:MIN:0.5:7:'.($opt{lowres_years}*52),
                      'RRA:MAX:0.5:7:'.($opt{lowres_years}*52)
                     );
+        if (my $ERROR = RRDs::error) {
+            die "ERROR $ERROR\n";
+        }
+        RRDs::update($rrd,($opt{now}-2*$opt{interval}).':U');
         if (my $ERROR = RRDs::error) {
             die "ERROR $ERROR\n";
         }
@@ -274,7 +278,7 @@ S<Tobi Oetiker E<lt>tobi@oetiker.chE<gt>>
 
 =head1 HISTORY
 
- 2007-12-19 to initial release
+ 2007-12-20 to initial release
 
 =cut
 

@@ -3,8 +3,9 @@
 use strict;
 
 # Point this to the location of your du2rrd data store
-{ no warnings;
-$Qooxdoo::Services::du2rrd::DU2RRD_ROOT = '/home/oposs/du2rrd/data';
+do {
+ no warnings;
+ $Qooxdoo::Services::du2rrd::DU2RRD_ROOT = '/var/lib/du2rrd/';
 }
 
 # Point this to your rrdtool installation of you are

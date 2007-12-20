@@ -35,7 +35,8 @@ qx.Class.define('du2rrd.Application',
             var title_box = new qx.ui.layout.HorizontalBoxLayout();
             title_box.set({
                 paddingBottom: 4,
-                height: 'auto'
+                height: 'auto',
+                verticalChildrenAlign: 'bottom'
             });
             var left = new qx.ui.form.Button(this.tr("du2rrd"));
             left.set({

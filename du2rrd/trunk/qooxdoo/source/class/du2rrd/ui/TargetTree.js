@@ -52,7 +52,7 @@ qx.Class.define('du2rrd.ui.TargetTree',
             var tcm = getTableColumnModel();
             var colbehaviour = tcm.getBehavior();
             colbehaviour.set(0, { width:'1*'});                            
-            colbehaviour.set(1, { width:50});                            
+            colbehaviour.set(1, { width:70});                            
             colbehaviour.set(2, { width:20});                            
             tcm.setDataCellRenderer(2,new qx.ui.table.cellrenderer.Boolean());
             addEventListener('cellClick',this._toggle,this);
