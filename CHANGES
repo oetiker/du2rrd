@@ -1,0 +1,5 @@
+0.0.2 - 2007-12-20
+
+to - Make sure that there are graphics after the first run
+to - Fixed vertical alignement of title
+to - Stop CGI code from generating warnings
