@@ -2,26 +2,28 @@
 
 use strict;
 
-# Point this to the location of your du2rrd data store
+
+# Point this to your rrdtool installation of you are
+# not useing the standard setup
+use lib qw( /usr/pack/rrdtool-1.2.23-mo/lib/perl );
+
+# this is for our local libraries
+use lib qw( perl );
+
+# Point this to the location of your du2rrd data store. It seems
+# perl wan't this to come only after the use-lib 
 do {
  no warnings;
  $Qooxdoo::Services::du2rrd::DU2RRD_ROOT = '/var/lib/du2rrd/';
 }
 
-# Point this to your rrdtool installation of you are
-# not useing the standard setup
-
-use lib qw( /usr/pack/rrdtool-1.2.23-mo/lib/perl );
-
 ###########################################################
 # Watch and learn. But don't modify until you understand.
 ###########################################################
 
-use lib qw( perl );
-
-
 '$Revision: 3879 $ ' =~ /Revision: (\S*)/;
 my $Revision = $1;
+
 
 use CGI;
 use CGI::Session;
