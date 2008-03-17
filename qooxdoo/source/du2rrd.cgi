@@ -15,7 +15,7 @@ use lib qw( perl );
 do {
  no warnings;
  $Qooxdoo::Services::du2rrd::DU2RRD_ROOT = '/var/lib/du2rrd/';
-}
+};
 
 ###########################################################
 # Watch and learn. But don't modify until you understand.
