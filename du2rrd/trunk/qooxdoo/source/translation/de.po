@@ -41,7 +41,7 @@ msgstr "Die Graphik konnte nicht geladen werden. Zweiter Versuch!"
 
 #: source/class/du2rrd/ui/GraphList.js:28
 msgid "Double click on tree item to draw a graph!"
-msgstr ""
+msgstr "Doppelclick auf ein Baumelement zeichnet die Graphik!"
 
 #: source/class/du2rrd/ui/RangeSelect.js:17
 msgid "graph 1 month back"
