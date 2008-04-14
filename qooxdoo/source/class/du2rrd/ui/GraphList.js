@@ -25,9 +25,9 @@ qx.Class.define('du2rrd.ui.GraphList',
         this._rpc = rpc;        
         // add initial text the right pane
         qx.event.message.Bus.subscribe('du2rrd.graph.select',this._load_graph,this);        
-        var initial = new qx.ui.form.Button(this.tr("Double-Click on Tree Item to draw a Graph!"));
+        var initial = new qx.ui.basic.Atom(this.tr("Double click on tree item to draw a graph!"));
         initial.set({
-            textColor: '#808080',
+            textColor: '#808080',        
             font: qx.ui.core.Font.fromString('20px bold sans-serif'),
             border: null
         });
