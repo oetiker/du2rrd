@@ -29,7 +29,7 @@ use CGI;
 use CGI::Session;
 use Qooxdoo::JSONRPC;
 
-$Qooxdoo::JSONRPC::debug=1;
+#$Qooxdoo::JSONRPC::debug=1;
 
 my $cgi     = new CGI;
 
