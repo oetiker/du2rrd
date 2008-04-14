@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-17 23:10+0100\n"
+"POT-Creation-Date: 2008-04-14 07:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,25 +16,29 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: source/class/du2rrd/Application.js:40
+#: source/class/du2rrd/Application.js:41
 msgid "du2rrd"
 msgstr ""
 
-#: source/class/du2rrd/Application.js:58
+#: source/class/du2rrd/Application.js:59
 msgid "Disk Space Monitoring Delux"
 msgstr ""
 
-#: source/class/du2rrd/Application.js:84
+#: source/class/du2rrd/Application.js:85
 msgid ""
 "Double-Click to draw a graph.<br/>Use Checkboxes to add items to the graph."
 msgstr ""
 
-#: source/class/du2rrd/Application.js:96
+#: source/class/du2rrd/Application.js:97
 msgid "Created by Tobi Oetiker, OETIKER+PARTNER AG"
 msgstr ""
 
 #: source/class/du2rrd/ui/Graph.js:89
 msgid "Loading Graph failed. Try again!"
+msgstr ""
+
+#: source/class/du2rrd/ui/GraphList.js:28
+msgid "Double-Click on Tree Item to draw a Graph!"
 msgstr ""
 
 #: source/class/du2rrd/ui/RangeSelect.js:17
