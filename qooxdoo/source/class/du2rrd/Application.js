@@ -20,7 +20,7 @@ qx.Class.define('du2rrd.Application',
         	);
 
   			// this will provide access to the server side of this app
-    		var rpc = new du2rrd.io.Rpc('http://johan.oetiker.ch/~oetiker/du2rrd/');
+    		var rpc = new du2rrd.io.Rpc('http://localhost/~oetiker/du2rrd/');
             
             var prime = new qx.ui.layout.VerticalBoxLayout();
 

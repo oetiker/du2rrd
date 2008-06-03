@@ -111,7 +111,7 @@ qx.Class.define('du2rrd.ui.TargetTree',
             var branch = model.addBranch(parent,data[0],false);
             model.data.application._path[branch] = data[2];
             model.data.application._nodemap[data[2]] = branch;
-            model.setColumnData(branch,1,Math.round(data[1]/1024/1024));            
+            model.setColumnData(branch,1,Math.round((data[1] / 1024)/ 1024));            
             model.setColumnData(branch,2,active);            
             var total = data[1];
             //var files = new Array();
@@ -127,7 +127,7 @@ qx.Class.define('du2rrd.ui.TargetTree',
                     model.data.application._path[leaf] = data[i+2];
                     model.data.application._nodemap[data[i+2]] = leaf;
                     sum += data[i+1];            
-                    model.setColumnData(leaf,1,Math.round(data[i+1]/1024/1024));        
+                    model.setColumnData(leaf,1,Math.round((data[i+1] / 1024) / 1024));        
                     model.setColumnData(leaf,2,(i < 3*10));                                    
                     i += 2;
                     //files.push(data[i-1]);
