@@ -26,6 +26,7 @@ qx.Class.define('du2rrd.io.Rpc',
 			base(arguments);
             setTimeout(300000);
             setUrl('du2rrd.cgi');
+           	setCrossDomain(true);
             setServiceName('du2rrd');
         }
 
@@ -39,8 +40,7 @@ qx.Class.define('du2rrd.io.Rpc',
         if ( document.location.host === '' ) {
 			with(this){
 	            __base_url = local_url;
-            	setUrl(__base_url + 'jsonrpc.cgi');
-            	setCrossDomain(true);
+            	setUrl(__base_url + 'du2rrd.cgi');
 			}
         }
 
