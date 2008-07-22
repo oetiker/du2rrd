@@ -61,7 +61,7 @@ qx.Class.define('du2rrd.Application',
             	textColor: '#a0a0a0',
             	font: qx.ui.core.Font.fromString('14px sans-serif')
 			});
-            right.add(new qx.ui.basic.Atom('VERSION'));
+            right.add(new qx.ui.basic.Atom('__TobiVersionString__'));
 			title_box.add(right);
 
             prime.add(title_box);

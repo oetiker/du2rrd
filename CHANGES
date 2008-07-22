@@ -1,3 +1,6 @@
+0.0.5 - 2008-07-22
+to - fixed js version string replacement bug ... 
+
 0.0.4 - 2008-06-03
 to - Make compatible with ff3 (remote calls only work if set to be cross
      domain)
