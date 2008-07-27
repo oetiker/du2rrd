@@ -10,6 +10,8 @@ use lib qw( /usr/pack/rrdtool-1.2.23-mo/lib/perl );
 # this is for our local libraries
 use lib qw( perl );
 
+$SIG{CHLD} = 'IGNORE'; # no zombies please
+
 # Point this to the location of your du2rrd data store. It seems
 # perl wan't this to come only after the use-lib 
 do {
