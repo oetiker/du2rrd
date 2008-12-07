@@ -1,5 +1,5 @@
 #!/bin/sh
-V=0.0.5 
+V=0.0.6
 set -x 
 root=du2rrd-$V
 mv qooxdoo/build qooxdoo/build.offline
