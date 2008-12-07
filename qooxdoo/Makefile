@@ -90,7 +90,7 @@ endif
 # Additional settings
 #####################
 
-FRAMEWORK_CACHE_PATH=/tmp/qooxdoo-cache
+FRAMEWORK_CACHE_PATH=/tmp/qooxdoo-${USER}
 
 error:
 	@echo "  * Please configure QOOXDOO_PATH"
