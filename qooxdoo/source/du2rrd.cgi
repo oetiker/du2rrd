@@ -28,7 +28,9 @@ my $Revision = $1;
 
 
 use CGI;
-use CGI::Session;
+use CGI::Session::Driver::file; # This line is mandatory.
+
+
 use Qooxdoo::JSONRPC;
 
 #$Qooxdoo::JSONRPC::debug=1;
@@ -57,6 +59,7 @@ if ($cgi->param('graph') and $cgi->param('graph') =~ m|^([^/]+)$|){
 }
 else {
     # if its not the image, then it must be a json-rpc call. 
+    $CGI::Session::Driver::file::FileName = 'du2rrd_'.($ENV{USER}||'').'%s.dat';
     my $session = new CGI::Session;
     Qooxdoo::JSONRPC::handle_request ($cgi, $session);
 }
