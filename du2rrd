@@ -34,7 +34,7 @@ sub main
                'hires_years=i','lowres_years=i', 'rrd_root=s') or exit(1);
     if ($opt{help})     { pod2usage(1) }
     if ($opt{man})      { pod2usage(-exitstatus => 0, -verbose => 2) }
-    if ($opt{version})  { print "sdu2rrd $Revision\n"; exit(0) }
+    if ($opt{version})  { print "du2rrd $Revision\n"; exit(0) }
     if ($opt{noaction}) { $opt{verbose}=1 };
     my $maps = {};
     while (my $map = shift @ARGV) {
@@ -138,7 +138,7 @@ sub parse_map {
         elsif ($entry =~ /^(.+)$/){
             push @rx, "${1}";
         }
-        # skip emty entries
+        # skip empty entries
     }
     my $rx = join '/',@rx;
     return (${name}, { rx => qr{^/$rx$}, labels=> [@names]});
@@ -154,7 +154,7 @@ sub parse_du {
     while(<>){
         chomp;
         my ($size,$path) = split /\s+/,$_,2;
-        $size *= 1024; # sitze is in kb!
+        $size *= 1024; # size is in kb!
         for my $map (keys %$maps) {
             $du->{$map} ||= {};
             my @ret;
