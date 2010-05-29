@@ -154,6 +154,7 @@ sub parse_du {
     while(<>){
         chomp;
         my ($size,$path) = split /\s+/,$_,2;
+        next if $size !~ /^\d+$/;
         $size *= 1024; # size is in kb!
         for my $map (keys %$maps) {
             $du->{$map} ||= {};
